@@ -1,5 +1,7 @@
 package main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,25 +9,53 @@ public class Game {
 
     public static void main( String[] args ) {
 
-        String word = "anonymous";
+        String word = "";
         char guess;
 
-        try ( Scanner scanner = new Scanner(System.in) ) {
+        try ( Scanner scanner = new Scanner( System.in ) ) {
 
             ArrayList<Character> puzzle = new ArrayList<>();
             int wrongGuesses = 0;
 
             // Fill the array with underscores, This has to be the same length as the puzzle word
-            for ( int i = 0; i < word.length() ; i++ ) {
-                puzzle.add('_');
-            }
-
+            
             System.out.println("-----------------------");
             System.out.println("Welcome to Java Hangman");
             System.out.println("-----------------------");
             
+            String difficulty;
+            System.out.print( """
+                Select Difficulty Level
+                1. Easy
+                2. Medium
+                3. Hard
+                4. I'm Feeling Lucky
+                >> """ );
+                difficulty = scanner.nextLine();
+                
+                while ( word.equals("") ) {
+                    
+                    switch ( difficulty.toLowerCase() ) {
+                        
+                        case "1", "easy" -> word = getFile( "easy.txt" );
+                        case "2", "medium" -> word = getFile( "medium.txt" );
+                        case "3", "hard" -> word = getFile( "hard.txt" );
+                        case "4", "lucky" -> word = getFile( "lucky.txt" );
+                        default -> word = "";
+                        
+                    }
+                }
+
+                
+            for ( int i = 0; i < word.length() ; i++ ) {
+                
+                puzzle.add('_');
+                
+            }
+            
+            
+            System.out.print("Word: ");
             do {
-                System.out.print("Word: ");
     
                 // Fill the array with underscores to represent unguessed letters
                 for ( char letter : puzzle ) {
@@ -81,6 +111,8 @@ public class Game {
 
 
         }
+
+        // System.out.println(getFile("easy.txt"));
 
     }
 
@@ -141,9 +173,29 @@ public class Game {
 
     public static String getFile( String path ) {
 
-        
+        File myFile = new File( path );
 
-        return "" ;
+        ArrayList<String> theWords = new ArrayList<>();
+
+        try ( Scanner myReader = new Scanner(myFile) ) {
+
+            while (myReader.hasNextLine()) {
+
+                theWords.add(myReader.nextLine());
+                
+                
+            }
+
+        } 
+        catch (FileNotFoundException e) {
+
+            System.out.println("Seems we had a problem getting quiz answers");
+            e.printStackTrace();
+
+        }
+        
+        int size = theWords.size();
+        return theWords.get( ( int ) (Math.random() * size) );
 
     }
 
