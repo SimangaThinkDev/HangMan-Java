@@ -48,6 +48,16 @@ public class Game {
                         }
 
                     }
+
+                    if ( !puzzle.contains('_') ) {
+
+                        System.out.println(currentAscii(wrongGuesses));
+                        System.out.println("YOU WIN!");
+                        System.out.println( "the word was: " + word );
+                        break;
+
+                    }
+
                 } 
 
                 else 
@@ -60,10 +70,10 @@ public class Game {
                 
             } while ( wrongGuesses < 6 );
 
-            System.out.println(currentAscii(wrongGuesses));
-
+            
             if ( wrongGuesses >= 6 ) {
-
+                
+                System.out.println(currentAscii(wrongGuesses));
                 System.out.println( "YOU LOSE!" );
                 System.out.println( "the word was: " + word );
 
@@ -126,6 +136,14 @@ public class Game {
 
             default -> "";
         };
+
+    }
+
+    public static String getFile( String path ) {
+
+        
+
+        return "" ;
 
     }
 
