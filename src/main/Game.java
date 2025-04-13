@@ -171,6 +171,11 @@ public class Game {
 
     }
 
+    /*
+     * This method works as a word getter for us
+     * @param path The path where the words are stored, or the name of the txt file
+     * @return String the word chosen at random from the txt file
+     */
     public static String getFile( String path ) {
 
         File myFile = new File( path );
