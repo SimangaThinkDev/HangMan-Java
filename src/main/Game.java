@@ -116,9 +116,11 @@ public class Game {
 
     }
 
-    // Method to show current ascii art
-    // @param int wrongGuesses ~ the amount of current wrong guesses
-    // @returns the ascii of the current state of the game
+    /*
+     * Method to show current ascii art
+     * @param int wrongGuesses ~ the amount of current wrong guesses
+     * @returns the ascii of the current state of the game
+     */
     static String currentAscii( int wrongGuesses ) {
 
         return switch ( wrongGuesses ) {
